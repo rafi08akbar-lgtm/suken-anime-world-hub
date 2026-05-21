@@ -3,65 +3,46 @@ import {
   Outlet,
   Link,
   createRootRouteWithContext,
-  useRouter,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { Toaster } from "react-hot-toast";
 
 import appCss from "../styles.css?url";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import mascot from "@/assets/mascot.png";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+    <div className="flex min-h-[70vh] items-center justify-center px-4 py-12">
+      <div className="text-center max-w-md">
+        <img src={mascot} alt="Lost mascot" className="w-48 h-48 mx-auto animate-float" />
+        <h1 className="text-7xl md:text-9xl font-display text-primary text-stroke-thick mt-4">404</h1>
+        <h2 className="font-heading text-2xl font-bold mt-2">This page went to another dimension!</h2>
+        <p className="text-muted-foreground mt-2">Looks like this URL took a wrong portal. Let's get you home, hero.</p>
+        <Link
+          to="/"
+          className="inline-block mt-6 bg-primary text-primary-foreground border-[3px] border-ink rounded-lg px-6 py-3 font-black comic-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+        >
+          ← Back to HQ
+        </Link>
       </div>
     </div>
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error }: { error: Error }) {
   console.error(error);
-  const router = useRouter();
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-[70vh] items-center justify-center px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Try again
-          </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
-        </div>
+        <h1 className="font-display text-4xl text-primary text-stroke-thick">Something exploded!</h1>
+        <p className="mt-2 text-muted-foreground">A wild bug appeared. Try refreshing.</p>
+        <a href="/" className="inline-block mt-6 bg-secondary text-ink border-[3px] border-ink rounded-lg px-6 py-3 font-black comic-shadow">
+          Go home
+        </a>
       </div>
     </div>
   );
@@ -72,21 +53,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "SUKEN — Your Anime World, Delivered!" },
+      { name: "description", content: "Plush dolls, cosplay outfits, action figures & anime accessories. Indonesia's #1 destination for all-age anime lovers." },
+      { property: "og:title", content: "SUKEN — Your Anime World, Delivered!" },
+      { property: "og:description", content: "Indonesia's energetic anime merchandise store." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -110,10 +83,27 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
+        <WhatsAppButton />
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            style: {
+              border: "3px solid #1A1A2E",
+              borderRadius: "12px",
+              fontWeight: 800,
+              boxShadow: "4px 4px 0 0 #1A1A2E",
+            },
+          }}
+        />
+      </div>
     </QueryClientProvider>
   );
 }
