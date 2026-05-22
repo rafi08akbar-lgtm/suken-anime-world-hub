@@ -12,7 +12,7 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-background border-b-[3px] border-ink">
       {/* Top promo strip */}
       <div className="bg-ink text-secondary text-xs font-bold py-1.5 text-center uppercase tracking-wider">
-        🚚 Free shipping all over Indonesia for orders above Rp 500k! ⚡
+        📍 Ruko SUKEN · Jl. Otaku No. 9, Jakarta · Buka 09:00–21:00 WIB
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">

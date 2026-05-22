@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Youtube, Mail } from "lucide-react";
+import { MapPin, Clock, Phone } from "lucide-react";
 
 export function Footer() {
   return (
@@ -7,48 +7,38 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-4 gap-8">
         <div>
           <h3 className="text-3xl font-display text-secondary text-stroke-thick mb-3">SUKEN</h3>
-          <p className="text-sm opacity-80">Your Anime World, Delivered! The #1 anime merchandise destination in Indonesia.</p>
-          <div className="flex gap-3 mt-4">
-            <a href="#" className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center hover:rotate-6 transition-transform">
-              <Instagram className="w-5 h-5" />
-            </a>
-            <a href="#" className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center hover:rotate-6 transition-transform">
-              <Youtube className="w-5 h-5" />
-            </a>
-            <a href="#" className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center hover:rotate-6 transition-transform">
-              <Mail className="w-5 h-5" />
-            </a>
-          </div>
+          <p className="text-sm opacity-80">
+            Ruko anime favoritmu di Indonesia. Mampir, lihat langsung, dan bawa pulang merchandise idolamu!
+          </p>
         </div>
         <div>
-          <h4 className="font-display text-xl text-secondary mb-3">Shop</h4>
+          <h4 className="font-display text-xl text-secondary mb-3">Katalog</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/shop" className="hover:text-secondary">All Products</Link></li>
-            <li><Link to="/shop" className="hover:text-secondary">Plush Dolls</Link></li>
+            <li><Link to="/shop" className="hover:text-secondary">Semua Produk</Link></li>
+            <li><Link to="/shop" className="hover:text-secondary">Plush Doll</Link></li>
             <li><Link to="/shop" className="hover:text-secondary">Cosplay</Link></li>
-            <li><Link to="/shop" className="hover:text-secondary">Figures</Link></li>
+            <li><Link to="/shop" className="hover:text-secondary">Action Figure</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="font-display text-xl text-secondary mb-3">Help</h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link to="/contact" className="hover:text-secondary">Contact HQ</Link></li>
-            <li><a href="#" className="hover:text-secondary">Shipping Info</a></li>
-            <li><a href="#" className="hover:text-secondary">Returns</a></li>
-            <li><a href="#" className="hover:text-secondary">FAQ</a></li>
+          <h4 className="font-display text-xl text-secondary mb-3">Kunjungi Toko</h4>
+          <ul className="space-y-3 text-sm">
+            <li className="flex gap-2"><MapPin className="w-4 h-4 mt-0.5 text-primary shrink-0" /> Ruko SUKEN, Jl. Otaku No. 9, Jakarta</li>
+            <li className="flex gap-2"><Clock className="w-4 h-4 mt-0.5 text-primary shrink-0" /> Senin–Sabtu · 09:00–21:00 WIB</li>
+            <li className="flex gap-2"><Phone className="w-4 h-4 mt-0.5 text-primary shrink-0" /> +62 812 3456 7890</li>
           </ul>
         </div>
         <div>
-          <h4 className="font-display text-xl text-secondary mb-3">Legal</h4>
+          <h4 className="font-display text-xl text-secondary mb-3">Info</h4>
           <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-secondary">Terms & Conditions</a></li>
-            <li><a href="#" className="hover:text-secondary">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-secondary">Refund Policy</a></li>
+            <li><Link to="/contact" className="hover:text-secondary">Hubungi Kami</Link></li>
+            <li><Link to="/blog" className="hover:text-secondary">Blog</Link></li>
+            <li><a href="#" className="hover:text-secondary">Syarat & Ketentuan</a></li>
           </ul>
         </div>
       </div>
       <div className="border-t border-background/20 py-4 text-center text-xs opacity-70">
-        © {new Date().getFullYear()} SUKEN. Powered by anime passion. 🌟
+        © {new Date().getFullYear()} SUKEN. Dibuat dengan semangat anime. 🌟
       </div>
     </footer>
   );

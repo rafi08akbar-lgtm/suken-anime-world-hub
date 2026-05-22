@@ -17,11 +17,11 @@ export const Route = createFileRoute("/")({
 });
 
 const tickerItems = [
-  "🔥 NEW DROP: One Piece Wano Collection",
-  "⚡ Free shipping over Rp 500k",
-  "🎁 Buy 2 plush, get 1 keychain FREE",
-  "🥷 Naruto cosplay restocked!",
-  "⭐ Limited Saiyan figures — only 5 left",
+  "🔥 KOLEKSI BARU: One Piece Wano",
+  "📍 Mampir ke ruko kami di Jakarta",
+  "🎁 Diskon spesial untuk pengunjung setia",
+  "🥷 Cosplay Naruto sudah restock!",
+  "⭐ Action figure Saiyan limited — sisa 5",
 ];
 
 function Home() {
@@ -51,20 +51,20 @@ function Home() {
               <span className="text-primary text-stroke-thick">OTAKU!</span>
             </h1>
             <p className="mt-4 text-lg max-w-md text-muted-foreground">
-              Plush dolls, cosplay sets, action figures & accessories — straight from your favorite anime worlds to your door in Indonesia.
+              Plush doll, kostum cosplay, action figure & aksesoris anime — lengkap dan bisa kamu lihat langsung di ruko kami di Jakarta.
             </p>
             <div className="flex flex-wrap gap-3 mt-6">
               <Link
                 to="/shop"
                 className="bg-primary text-primary-foreground border-[3px] border-ink rounded-lg px-6 py-3 font-black text-lg comic-shadow-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all"
               >
-                SHOP NOW →
+                LIHAT KATALOG →
               </Link>
               <Link
-                to="/shop"
+                to="/contact"
                 className="bg-secondary text-ink border-[3px] border-ink rounded-lg px-6 py-3 font-black text-lg comic-shadow-lg hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all"
               >
-                NEW DROPS
+                KUNJUNGI RUKO
               </Link>
             </div>
           </motion.div>
@@ -147,9 +147,9 @@ function Home() {
         <h2 className="font-display text-5xl text-stroke-thick text-secondary text-center mb-12">WHY SUKEN?</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {[
-            { icon: ShieldCheck, title: "100% Original", desc: "Every figure, plush & garment is officially licensed and anime-guaranteed." },
-            { icon: Truck, title: "Express Delivery", desc: "Ships nationwide from Jakarta — most orders arrive in 2-3 days." },
-            { icon: Zap, title: "Otaku-Approved", desc: "Curated by hardcore fans for hardcore fans. We know our anime." },
+            { icon: ShieldCheck, title: "100% Original", desc: "Semua figure, plush & kostum berlisensi resmi dan dijamin keasliannya." },
+            { icon: Truck, title: "Mampir Langsung", desc: "Datang ke ruko di Jakarta, cek barang langsung sebelum kamu bawa pulang." },
+            { icon: Zap, title: "Direkomendasi Otaku", desc: "Dikurasi oleh fans anime sejati. Kami paham apa yang kamu cari." },
           ].map((f, i) => (
             <motion.div
               key={f.title}
@@ -203,23 +203,29 @@ function Home() {
         </div>
       </section>
 
-      {/* NEWSLETTER */}
+      {/* VISIT CTA */}
       <section className="max-w-4xl mx-auto px-4 py-20">
         <div className="bg-primary text-primary-foreground border-[3px] border-ink rounded-2xl p-8 md:p-12 comic-shadow-xl relative overflow-hidden">
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary rounded-full opacity-30" />
           <div className="relative text-center">
-            <h2 className="font-display text-5xl">JOIN THE GUILD!</h2>
-            <p className="mt-3 max-w-md mx-auto">Get first dibs on new drops, exclusive discounts & anime news every Friday.</p>
-            <form onSubmit={(e) => e.preventDefault()} className="mt-6 flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="flex-1 px-4 py-3 bg-background text-foreground border-[3px] border-ink rounded-lg font-bold focus:outline-none focus:ring-2 focus:ring-secondary"
-              />
-              <button className="bg-secondary text-ink border-[3px] border-ink rounded-lg px-6 py-3 font-black comic-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                JOIN!
-              </button>
-            </form>
+            <h2 className="font-display text-5xl">MAMPIR KE RUKO!</h2>
+            <p className="mt-3 max-w-md mx-auto">
+              Lihat langsung koleksi merchandise anime kami. Buka tiap hari di Jl. Otaku No. 9, Jakarta.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link
+                to="/contact"
+                className="bg-secondary text-ink border-[3px] border-ink rounded-lg px-6 py-3 font-black comic-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+              >
+                LIHAT LOKASI
+              </Link>
+              <Link
+                to="/shop"
+                className="bg-background text-ink border-[3px] border-ink rounded-lg px-6 py-3 font-black comic-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+              >
+                LIHAT KATALOG
+              </Link>
+            </div>
           </div>
         </div>
       </section>
