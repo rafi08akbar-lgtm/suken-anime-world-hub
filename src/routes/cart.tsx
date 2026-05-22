@@ -1,30 +1,26 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Minus, Plus, X } from "lucide-react";
 import { useCart } from "@/lib/store";
-import { formatIDR } from "@/lib/products";
+import { formatIDR, productImage, categoryLabel } from "@/lib/products";
 import mascot from "@/assets/mascot.png";
 
 export const Route = createFileRoute("/cart")({
   component: Cart,
-  head: () => ({ meta: [{ title: "Your Cart — SUKEN" }] }),
+  head: () => ({ meta: [{ title: "Keranjang — SUKEN" }] }),
 });
 
 function Cart() {
   const { items, setQty, remove, subtotal } = useCart();
-  const shipping = subtotal() >= 500000 || items.length === 0 ? 0 : 25000;
-  const total = subtotal() + shipping;
+  const total = subtotal();
 
   if (items.length === 0) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
         <img src={mascot} alt="Sad mascot" className="w-48 h-48 mx-auto opacity-80 grayscale" />
-        <h1 className="font-display text-5xl text-primary text-stroke-thick mt-4">Cart's empty, hero!</h1>
-        <p className="text-muted-foreground mt-2">Your mascot is sad. Fill the cart with epic loot!</p>
-        <Link
-          to="/shop"
-          className="inline-block mt-6 bg-primary text-primary-foreground border-[3px] border-ink rounded-lg px-6 py-3 font-black comic-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
-        >
-          START SHOPPING →
+        <h1 className="font-display text-5xl text-primary text-stroke-thick mt-4">Keranjang kosong!</h1>
+        <p className="text-muted-foreground mt-2">Yuk isi keranjangmu dengan koleksi anime favoritmu!</p>
+        <Link to="/shop" className="inline-block mt-6 bg-primary text-primary-foreground border-[3px] border-ink rounded-lg px-6 py-3 font-black comic-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+          MULAI BELANJA →
         </Link>
       </div>
     );
@@ -32,14 +28,14 @@ function Cart() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="font-display text-5xl text-stroke-thick text-primary mb-8">YOUR CART</h1>
+      <h1 className="font-display text-5xl text-stroke-thick text-primary mb-8">KERANJANG</h1>
       <div className="grid lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
           {items.map((item) => (
             <div key={item.product.id} className="bg-card border-[3px] border-ink rounded-2xl p-4 comic-shadow flex gap-4">
-              <img src={item.product.image} alt={item.product.name} className="w-24 h-24 object-cover rounded-lg border-2 border-ink" />
+              <img src={productImage(item.product)} alt={item.product.name} className="w-24 h-24 object-cover rounded-lg border-2 border-ink" />
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-black text-primary uppercase">{item.product.fandom}</p>
+                <p className="text-xs font-black text-primary uppercase">{categoryLabel(item.product.category)}</p>
                 <h3 className="font-heading font-bold truncate">{item.product.name}</h3>
                 <p className="font-display text-xl mt-1">{formatIDR(item.product.price)}</p>
               </div>
@@ -62,30 +58,26 @@ function Cart() {
         </div>
 
         <aside className="bg-secondary border-[3px] border-ink rounded-2xl p-6 comic-shadow-lg h-fit sticky top-32">
-          <h2 className="font-display text-2xl mb-4">ORDER SUMMARY</h2>
+          <h2 className="font-display text-2xl mb-4">RINGKASAN PESANAN</h2>
           <div className="space-y-2 font-bold">
             <div className="flex justify-between">
               <span>Subtotal</span>
-              <span>{formatIDR(subtotal())}</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Shipping</span>
-              <span>{shipping === 0 ? "FREE 🎉" : formatIDR(shipping)}</span>
+              <span>{formatIDR(total)}</span>
             </div>
             <div className="border-t-2 border-ink pt-2 mt-2 flex justify-between font-display text-2xl">
               <span>Total</span>
               <span>{formatIDR(total)}</span>
             </div>
           </div>
-          <input
-            placeholder="Promo code"
-            className="w-full mt-4 px-4 py-2 bg-background border-2 border-ink rounded-lg font-bold"
-          />
-          <button className="w-full mt-4 bg-primary text-primary-foreground border-[3px] border-ink rounded-lg py-3 font-black text-lg comic-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+          <p className="text-xs mt-3 text-ink/80">Pembayaran & pengiriman dikonfirmasi via WhatsApp setelah checkout.</p>
+          <Link
+            to="/checkout"
+            className="block text-center w-full mt-4 bg-primary text-primary-foreground border-[3px] border-ink rounded-lg py-3 font-black text-lg comic-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+          >
             CHECKOUT →
-          </button>
+          </Link>
           <Link to="/shop" className="block text-center mt-3 font-bold underline">
-            Keep shopping
+            Lanjut belanja
           </Link>
         </aside>
       </div>
