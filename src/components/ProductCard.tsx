@@ -3,7 +3,7 @@ import { Heart, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import toast from "react-hot-toast";
-import { type Product, formatIDR } from "@/lib/products";
+import { type Product, formatIDR, productImage, categoryLabel } from "@/lib/products";
 import { useCart } from "@/lib/store";
 
 export function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
@@ -35,21 +35,14 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         params={{ slug: product.slug }}
         className="group block bg-card border-[3px] border-ink rounded-2xl overflow-hidden comic-shadow hover:comic-shadow-lg hover:-translate-y-1 hover:-translate-x-1 transition-all relative"
       >
-        {/* Badges */}
-        <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
-          {product.badges?.map((b) => (
-            <span
-              key={b}
-              className={`px-2 py-0.5 text-xs font-black border-2 border-ink rounded-md rotate-[-4deg] ${
-                b === "HOT" ? "bg-primary text-primary-foreground" : "bg-secondary text-ink"
-              }`}
-            >
-              {b}
+        {product.is_featured && (
+          <div className="absolute top-3 left-3 z-10">
+            <span className="px-2 py-0.5 text-xs font-black border-2 border-ink rounded-md rotate-[-4deg] bg-primary text-primary-foreground">
+              HOT
             </span>
-          ))}
-        </div>
+          </div>
+        )}
 
-        {/* Wishlist */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -61,19 +54,17 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           <Heart className={`w-4 h-4 ${wished ? "fill-primary text-primary" : ""}`} />
         </button>
 
-        {/* Image */}
         <div className="aspect-square bg-surface overflow-hidden">
           <img
-            src={product.image}
+            src={productImage(product)}
             alt={product.name}
             loading="lazy"
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
         </div>
 
-        {/* Info */}
         <div className="p-4 border-t-[3px] border-ink">
-          <p className="text-xs font-bold text-primary uppercase tracking-wider">{product.fandom}</p>
+          <p className="text-xs font-bold text-primary uppercase tracking-wider">{categoryLabel(product.category)}</p>
           <h3 className="font-heading font-bold text-base leading-tight mt-1 line-clamp-2">{product.name}</h3>
           <div className="flex items-center justify-between mt-3">
             <span className="font-display text-xl text-ink">{formatIDR(product.price)}</span>
@@ -85,6 +76,10 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               <Plus className="w-5 h-5" strokeWidth={3} />
             </button>
           </div>
+          {product.stock <= 5 && product.stock > 0 && (
+            <p className="text-xs font-bold text-primary mt-2">🔥 Tersisa {product.stock}!</p>
+          )}
+          {product.stock === 0 && <p className="text-xs font-bold text-muted-foreground mt-2">Habis</p>}
         </div>
       </Link>
     </motion.div>
