@@ -51,7 +51,7 @@ function Shop() {
             type="text"
             placeholder="Search Naruto, plush, Saiyan..."
             defaultValue={q || ""}
-            onChange={(e) => navigate({ search: (s) => ({ ...s, q: e.target.value || undefined }) })}
+            onChange={(e) => navigate({ search: (s: z.infer<typeof search>) => ({ ...s, q: e.target.value || undefined }) })}
             className="w-full pl-11 pr-4 py-3 bg-card border-[3px] border-ink rounded-lg font-bold focus:outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
@@ -69,7 +69,7 @@ function Shop() {
       {/* Category filter chips */}
       <div className="flex flex-wrap gap-2 mb-8">
         <button
-          onClick={() => navigate({ search: (s) => ({ ...s, cat: undefined }) })}
+          onClick={() => navigate({ search: (s: z.infer<typeof search>) => ({ ...s, cat: undefined }) })}
           className={`px-4 py-2 border-[3px] border-ink rounded-full font-black text-sm transition-all ${
             !cat ? "bg-ink text-background" : "bg-card hover:bg-secondary"
           }`}
@@ -79,7 +79,7 @@ function Shop() {
         {CATEGORIES.map((c) => (
           <button
             key={c.id}
-            onClick={() => navigate({ search: (s) => ({ ...s, cat: c.id as Category }) })}
+            onClick={() => navigate({ search: (s: z.infer<typeof search>) => ({ ...s, cat: c.id as Category }) })}
             className={`px-4 py-2 border-[3px] border-ink rounded-full font-black text-sm transition-all ${
               cat === c.id ? "bg-primary text-primary-foreground" : "bg-card hover:bg-secondary"
             }`}
